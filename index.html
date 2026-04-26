@@ -235,7 +235,7 @@ function spawnEnemy() {
   enemies.push({
     x, y, w: TANK_SIZE, h: TANK_SIZE,
     dir: 2,
-    speed: ENEMY_SPEED_BASE + Math.random() * 0.2 + wave * 0.02,
+    speed: ENEMY_SPEED_BASE + Math.random() * 0.1 + wave * 0.005,
     cooldown: Math.floor(Math.random() * 40) + 20,
     hp: 1 + (wave >= 3 ? 1 : 0) + (wave >= 6 ? 1 : 0),
     moveTimer: 0
@@ -290,8 +290,8 @@ function updateEnemies() {
     e.cooldown--;
     if (e.cooldown <= 0 && distance(e.x, e.y, player.x, player.y) < 500) {
       fireBullet('enemy', e.x + e.w/2, e.y + e.h/2, e.dir, false);
-      e.cooldown = Math.floor(Math.random() * 70) + 50 - wave * 2;
-      if (e.cooldown < 30) e.cooldown = 30;
+      e.cooldown = Math.floor(Math.random() * 100) + 80 - wave * 3;
+      if (e.cooldown < 50) e.cooldown = 50;
     }
 
     // 碰触玩家
