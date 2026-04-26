@@ -84,10 +84,10 @@ const waveSpan = document.getElementById('waveDisplay');
 // ============ 游戏配置 ============
 const TANK_SIZE = 34;
 const BULLET_RADIUS = 4;
-const PLAYER_SPEED = 2.8;
-const ENEMY_SPEED_BASE = 0.1;
-const BULLET_SPEED = 5;
-const SHOT_COOLDOWN = 18; // frames
+const PLAYER_SPEED = 3.5;
+const ENEMY_SPEED_BASE = 0.08;
+const BULLET_SPEED = 7;
+const SHOT_COOLDOWN = 8; // frames
 const SPAWN_MARGIN = 60;
 
 // ============ 游戏状态 ============
@@ -113,7 +113,7 @@ function initGame() {
   explosions = [];
   obstacles = generateObstacles();
   score = 0;
-  lives = 3;
+  lives = 5;
   wave = 0;
   gameOver = false;
   frameCount = 0;
@@ -125,7 +125,7 @@ function initGame() {
 function nextWave() {
   wave++;
   waveEnemiesSpawned = 0;
-  waveEnemyCount = 3 + wave * 2;
+  waveEnemyCount = 2 + wave;
   enemySpawnTimer = 60;
   waveSpan.textContent = wave;
 }
@@ -237,7 +237,7 @@ function spawnEnemy() {
     dir: 2,
     speed: ENEMY_SPEED_BASE + Math.random() * 0.1 + wave * 0.005,
     cooldown: Math.floor(Math.random() * 40) + 20,
-    hp: 1 + (wave >= 3 ? 1 : 0) + (wave >= 6 ? 1 : 0),
+    hp: 1,
     moveTimer: 0
   });
 }
@@ -372,7 +372,7 @@ function hitPlayer() {
   lives--;
   updateDisplay();
   createExplosion(player.x + player.w/2, player.y + player.h/2, 25, '#ff4444');
-  player.invincible = 90; // 1.5秒无敌
+  player.invincible = 150; // 2.5秒无敌
   if (lives <= 0) {
     gameOver = true;
     createExplosion(player.x + player.w/2, player.y + player.h/2, 40, '#ff0000');
